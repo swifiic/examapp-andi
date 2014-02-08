@@ -42,7 +42,7 @@ public class Questions extends Activity {
 	private String ns = null;
 
 	// constant for setting the total no. of questions in the test
-	private int noOfQues;// = 100;
+	private int noOfQues;
 
 	final static int noOfOpt = 4; // no. of options in MCQ questions
 
@@ -465,7 +465,6 @@ public class Questions extends Activity {
 		}
 	}
 
-	// TODO change the save dir of drawing to coursecode/Solution/
 	// writes all answers to a text file in external memory
 	private void submit() {
 		String option, wStr;
@@ -474,8 +473,6 @@ public class Questions extends Activity {
 			try {
 				// create a directory 'Solution' which will have the solutions
 				// files for packaging into a zip archive
-				// TODO packagefiles in ;Solution' dir into zip, named as
-				// <Idno.>.zip
 
 				File solFile = new File(path + courseCode + "/Solution/"
 						+ "soln.txt");
@@ -557,6 +554,7 @@ public class Questions extends Activity {
 		long totalTimeCountInSeconds = timerMin * 60; // total count down time
 														// in seconds
 
+		@SuppressWarnings("unused")
 		CountDownTimer countDownTimer = new CountDownTimer(
 				totalTimeCountInSeconds * 1000, 1000) {
 

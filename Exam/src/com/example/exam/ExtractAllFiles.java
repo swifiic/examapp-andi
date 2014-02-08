@@ -19,9 +19,7 @@ package com.example.exam;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
-/**
- *
- */
+@SuppressWarnings("unused")
 public class ExtractAllFiles {
 
 	private String pathName;

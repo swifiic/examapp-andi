@@ -1,16 +1,10 @@
 package com.example.exam;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -29,6 +23,7 @@ import android.support.v4.app.NavUtils;
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */
+@SuppressWarnings("unused")
 public class LoginActivity extends Activity {
 
 	/*

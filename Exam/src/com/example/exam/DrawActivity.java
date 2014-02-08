@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
