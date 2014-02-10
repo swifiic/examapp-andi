@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 
 /**
+ * @author aniket
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */

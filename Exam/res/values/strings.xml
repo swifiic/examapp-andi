@@ -27,5 +27,8 @@
     <string name="med">Medium</string>
     <string name="lrg">Large</string>
     <string name="done_button">Done</string>
+    <string name="status_button">Show Status</string>
+    <string name="title_activity_view_status">ViewStatus</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

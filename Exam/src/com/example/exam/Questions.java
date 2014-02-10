@@ -1,5 +1,9 @@
 package com.example.exam;
 
+/**
+ * @author aniket
+ *
+ */
 //import com.example.exam.R;
 import java.io.*;
 
@@ -28,9 +32,11 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,12 +61,12 @@ public class Questions extends Activity {
 	private int timerMin; // stores total duration of test in minutes
 
 	// string arrays for storing parsed questions data
-	private String quesText[] = new String[noOfQues];
-	private String optionText[][] = new String[noOfQues][noOfOpt];
-	private String img[] = new String[noOfQues]; // stores name of the image
-													// file, if any
-	private int ans[] = new int[noOfQues]; // stores chosen options
-	private boolean forReview[] = new boolean[noOfQues];
+	private String quesText[];
+	private String optionText[][];
+	private String img[];// stores name of the image
+							// file, if any
+	private int ans[]; // stores chosen options
+	private boolean forReview[];
 
 	private int rand; // for storing random seed to shuffle order of options
 
@@ -199,6 +205,25 @@ public class Questions extends Activity {
 			}
 		});
 
+		optionGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				if (displayCnt > 0) {
+					ans[displayCnt] = optionGroup.getCheckedRadioButtonId();
+				}
+			}
+		});
+
+		//XXX
+		reviewCheck
+				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
+						forReview[displayCnt] = reviewCheck.isChecked();
+
+					}
+				});
 	}
 
 	@Override
@@ -239,6 +264,17 @@ public class Questions extends Activity {
 							}).setIcon(android.R.drawable.ic_dialog_info)
 					.show();
 			return true;
+			// XXX
+		case R.id.statButton: {
+			Intent vs = new Intent(Questions.this, ViewStatus.class);
+			vs.putExtra("totalQues", noOfQues);
+			Bundle b1 = new Bundle();
+			b1.putBooleanArray("rev", forReview);
+			b1.putIntArray("ans", ans);
+			vs.putExtras(b1);
+			startActivityForResult(vs, 2);
+
+		}
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -284,6 +320,12 @@ public class Questions extends Activity {
 			} else if (name.equals("totalQuestions")) { // total no. of
 														// questions
 				noOfQues = (Integer.parseInt(readTag(parser, "totalQuestions")));
+				quesText = new String[noOfQues];
+				optionText = new String[noOfQues][noOfOpt];
+				img = new String[noOfQues]; // stores name of the image
+											// file, if any
+				ans = new int[noOfQues]; // stores chosen options
+				forReview = new boolean[noOfQues];
 			} else if (name.equals("question")) { // looking for the question
 													// tag
 				readQuestion(parser);
@@ -462,6 +504,9 @@ public class Questions extends Activity {
 			} else if (resultCode == 2) { // User has submitted
 				submit();
 			}
+		} else if (requestCode == 2) {
+			displayCnt = resultCode;
+			displayQues();
 		}
 	}
 
