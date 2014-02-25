@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Export-Package: net.lingala.zip4j.core,net.lingala.zip4j.crypto,net.li
+ ngala.zip4j.crypto.engine,net.lingala.zip4j.crypto.PBKDF2,net.lingala
+ .zip4j.exception,net.lingala.zip4j.io,net.lingala.zip4j.model,net.lin
+ gala.zip4j.progress,net.lingala.zip4j.unzip,net.lingala.zip4j.util,ne
+ t.lingala.zip4j.zip
+Bundle-Vendor: Zip4j
+Bundle-Version: 1.3.2
+Bundle-Name: Zip4j
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: net.lingala.zip4j
+Bundle-RequiredExecutionEnvironment: J2SE-1.4
+
