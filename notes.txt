@@ -1,0 +1,18 @@
+v 0.1.1
+*10 MCQs with 4 options for each questions
+
+*parsing xml file containing questions using code adapted 
+	from http://developer.android.com/training/basics/network-ops/xml.html
+	
+Update 21/1/2014:
+Moved Submit button to action bar
+Status bar is now hidden in the Questions activity
+Added a 'Clear Answer' button
+Added a 'mark for review' check box
+
+Update 23/01/2014:
+Added a canvas for drawing
+
+Update 04/02/2014:
+add jar file for zipping/unzipping protected files from http://www.lingala.net/zip4j/download.php
+Reading protected zip files using library zip4j

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- created Jan 16, 2014 1:58 AM -->
+<test>
+    <subject>English</subject>
+    <timer>120</timer>
+    
+	<question>
+		<statement>Test question one, asked just for the sake of asking.</statement>
+
+		<option>Wrong Option</option>
+
+		<option>Really Wrong Option</option>
+
+		<option>Correct Option</option>
+
+		<option>Really Wrong Option</option>	
+	</question>
+
+	<question>
+		<statement>Test question two, again asked just for the sake of asking.</statement>
+
+		<option>Wrong Option</option>
+
+		<option>Correct Option</option>
+
+		<option>Wrong Option because there can only be one correct choice</option>
+
+		<option>Wrong Option for the same reason</option>
+	</question>	
+	
+	<question>
+		<statement>Test question three, asked just for the sake of asking.</statement>
+
+		<option>Wrong Option</option>
+
+		<option>Correct Option</option>
+
+		<option>Wrong Option</option>
+		
+		<option>Wrong Option</option>
+	</question>
+
+	<question>
+		<statement>Test question four, again asked just for the sake of asking.</statement>
+
+		<option>Wrong Option</option>
+
+		<option>Correct Option</option>
+
+		<option>Wrong Option because there can only be one correct choice</option>
+
+		<option>Wrong Option</option>
+	</question>	
+	
+	<question>
+		<statement>Test question five, asked just for the sake of asking.</statement>
+
+		<option>Wrong Option</option>
+
+		<option>Really Wrong Option</option>
+
+		<option>Correct Option</option>
+
+		<option>Wrong Option because there can only be one correct choice</option>
+	</question>
+	
+	<question>
+	    <statement> Test Question six: Draw something worth drawing. A long question would look like this. You can choose between 4 colors, 3 brush sizes and 3 eraser sizes. </statement>
+		
+		<draw></draw>
+	</question>
+	
+</test>
