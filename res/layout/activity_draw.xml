@@ -124,7 +124,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <com.example.exam.DrawingView
+        <in.swifiic.exam.DrawingView
             android:id="@+id/drawing"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

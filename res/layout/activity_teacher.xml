@@ -8,20 +8,19 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainScreen" >
+    tools:context=".TeacherActivity" >
 
     <Button
-        android:id="@+id/examButton"
+        android:id="@+id/importButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/exam_button" />
+        android:text="Import Test" />
 
     <Button
-        android:id="@+id/teacherButton"
+        android:id="@+id/evalButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/teacher_button" />
+        android:text="Evaluate Test" />
 
 </LinearLayout>
