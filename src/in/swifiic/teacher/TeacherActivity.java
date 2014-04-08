@@ -12,6 +12,8 @@ import android.widget.Button;
 
 public class TeacherActivity extends Activity {
 
+	private static int FILE_RESULT_CODE = 7733;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -22,9 +24,7 @@ public class TeacherActivity extends Activity {
 
 		bImport.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				// TODO activity for importing test
-				Intent intent = new Intent(TeacherActivity.this,
-						ListFolder.class);
+				Intent intent = new Intent(TeacherActivity.this, ImportTest.class);
 				startActivity(intent);
 			}
 		});
@@ -43,4 +43,6 @@ public class TeacherActivity extends Activity {
 		getMenuInflater().inflate(R.menu.teacher, menu);
 		return true;
 	}
+
+	
 }

@@ -45,7 +45,7 @@ public class ViewStatus extends Activity {
 			btn[i].setText(Integer.toString(i + 1));
 			btn[i].setTextColor(Color.parseColor("#000000"));
 			// btn[i].setTextSize(20);
-			if (ans[i] != 0) {
+			if (ans[i] != 0) {		
 				btn[i].setBackgroundColor(0xFFFFCC00);
 			}
 			if (forReview[i]) {

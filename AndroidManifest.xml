@@ -70,6 +70,10 @@
             android:name="in.swifiic.teacher.FileArrayAdapter"
             android:label="@string/title_activity_file_array_adapter" >
         </activity>
+        <activity
+            android:name="in.swifiic.teacher.ImportTest"
+            android:label="@string/title_activity_import_test" >
+        </activity>
     </application>
 
 </manifest>

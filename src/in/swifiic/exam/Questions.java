@@ -165,6 +165,7 @@ public class Questions extends Activity {
 
 		// set the inital display and start the timer
 		vPrev.setEnabled(false);
+		vNext.setEnabled(true);
 		displayQues();
 		startTimer();
 
@@ -205,6 +206,7 @@ public class Questions extends Activity {
 		vclear.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				optionGroup.clearCheck();
+				ans[displayCnt] = 0;
 			}
 		});
 
@@ -451,11 +453,13 @@ public class Questions extends Activity {
 		final ImageView qpic = (ImageView) findViewById(R.id.imageView);
 		int rbIndex = 0; // for setting random option index
 
-		if (displayCnt == parsedQuesCnt - 1)
+		if (displayCnt == parsedQuesCnt - 1) {
 			vNext.setEnabled(false);
-		else if (displayCnt == 0)
+			vPrev.setEnabled(true);
+		} else if (displayCnt == 0) {
 			vPrev.setEnabled(false);
-		else {
+			vNext.setEnabled(true);
+		} else {
 			vPrev.setEnabled(true);
 			vNext.setEnabled(true);
 		}
@@ -513,7 +517,11 @@ public class Questions extends Activity {
 		}
 	}
 
-	// writes all answers to a text file in external memory
+	/**
+	 * Writes all answers to a text file in external memory, and compresses it
+	 * to a password protected zip file. Name format is:
+	 * <IdNo><course_code>.zip; Password is IdNo.
+	 */
 	private void submit() {
 		String option, wStr;
 		int i, opt; // opt for getting actual option selected
@@ -579,7 +587,7 @@ public class Questions extends Activity {
 			}
 			@SuppressWarnings("unused")
 			AddFolder zipSol = new AddFolder(path + courseCode + "/Solution",
-					path + courseCode + "/", courseCode + idNo);
+					path + courseCode + "/", courseCode + idNo, idNo);
 			finish();
 		} else
 			Toast.makeText(getApplicationContext(),
@@ -599,8 +607,9 @@ public class Questions extends Activity {
 	// implements the timer functionality
 	private void startTimer() {
 		final TextView viewTimer = (TextView) findViewById(R.id.timer);
-		long totalTimeCountInSeconds = timerMin * 60; // total count down time
-														// in seconds
+		long totalTimeCountInSeconds = (int) timerMin * 60; // total count down
+															// time
+		// in seconds
 
 		@SuppressWarnings("unused")
 		CountDownTimer countDownTimer = new CountDownTimer(
@@ -615,9 +624,9 @@ public class Questions extends Activity {
 
 			}
 
+			// this function is called when the timecount is finished
 			@Override
 			public void onFinish() {
-				// this function will be called when the timecount is finished
 				viewTimer.setText("Time up!");
 				viewTimer.setVisibility(View.VISIBLE);
 				new AlertDialog.Builder(Questions.this)
@@ -630,8 +639,8 @@ public class Questions extends Activity {
 										// continue with submission
 										submit();
 									}
-								});
-
+								}).setIcon(android.R.drawable.ic_dialog_info)
+						.show();
 			}
 
 		}.start();

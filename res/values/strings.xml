@@ -35,5 +35,6 @@
     <string name="title_activity_list_folder">ListFolder</string>
     <string name="title_activity_albumb">Albumb</string>
     <string name="title_activity_file_array_adapter">FileArrayAdapter</string>
+    <string name="title_activity_import_test">ImportTest</string>
 
 </resources>
