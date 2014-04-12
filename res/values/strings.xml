@@ -32,9 +32,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="teacher_button">Teacher Login</string>
     <string name="title_activity_teacher">TeacherActivity</string>
-    <string name="title_activity_list_folder">ListFolder</string>
-    <string name="title_activity_albumb">Albumb</string>
-    <string name="title_activity_file_array_adapter">FileArrayAdapter</string>
+    <string name="title_activity_sendsol">SendSol</string>
     <string name="title_activity_import_test">ImportTest</string>
+    <string name="title_activity_send_soln">SendSoln</string>
 
 </resources>

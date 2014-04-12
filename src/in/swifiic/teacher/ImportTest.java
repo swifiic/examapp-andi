@@ -1,5 +1,9 @@
 package in.swifiic.teacher;
 
+import in.swifiic.android.app.lib.Helper;
+import in.swifiic.android.app.lib.xml.Action;
+import in.swifiic.exam.SendSoln;
+import in.swifiic.examApp.Constants;
 import in.swifiic.examApp.R;
 import android.os.Bundle;
 import android.app.Activity;
@@ -68,9 +72,19 @@ public class ImportTest extends Activity {
 			return;
 		if (requestCode == FILE_SELECT_RESULT_CODE) {
 			if (resultCode == RESULT_OK) {
-				String FilePath = data.getData().getPath();
+				String filePath = data.getData().getPath();
 				// FilePath is path of file as a string
-				tFilePath.setText(FilePath);
+				tFilePath.setText(filePath);
+				Action act = new Action("SendQuestions", Constants.aeCtx);
+				String dataStr = Helper.fileToB64String(filePath);
+				act.setFileData(dataStr);
+				// XXX - from SUTA provider or similar persistent data like preferences
+				act.addArgument("fromTeacher", "abhishek"); 
+				// XXX - should be from drop down list - similar to messenger - should have multi-select - New Activity is also fine
+				act.addArgument("toUsers", "aniket|abhishek"); 
+				String hubAddress = Constants.hubAddress;
+                
+                Helper.sendAction(act, hubAddress + Constants.hubEndpoint, getBaseContext());
 			}
 		}
 	}

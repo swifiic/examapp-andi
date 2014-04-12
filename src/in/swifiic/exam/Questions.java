@@ -4,7 +4,7 @@ package in.swifiic.exam;
  * @author aniket
  *
  */
-//import in.swifiic.exam.R;
+
 import in.swifiic.examApp.AddFolder;
 
 import java.io.*;
@@ -253,9 +253,6 @@ public class Questions extends Activity {
 										int which) {
 									// continue with submission
 									submit();
-									Toast.makeText(getApplicationContext(),
-											"Successfully Submitted",
-											Toast.LENGTH_SHORT).show();
 								}
 							})
 					.setNegativeButton(android.R.string.cancel,
@@ -580,6 +577,7 @@ public class Questions extends Activity {
 				}
 				solWriter.close();
 				fOut.close();
+
 			} catch (Exception e) {
 				Toast.makeText(getApplicationContext(),
 						"Unable to open file for writing Solution",
@@ -588,6 +586,12 @@ public class Questions extends Activity {
 			@SuppressWarnings("unused")
 			AddFolder zipSol = new AddFolder(path + courseCode + "/Solution",
 					path + courseCode + "/", courseCode + idNo, idNo);
+			
+			//TODO convert created zip file into string and send it
+			Intent sendSln = new Intent(Questions.this, SendSoln.class);
+			sendSln.putExtra("path", path + courseCode + "/");
+			sendSln.putExtra("fName", courseCode + idNo);
+			startActivity(sendSln);
 			finish();
 		} else
 			Toast.makeText(getApplicationContext(),
@@ -629,19 +633,17 @@ public class Questions extends Activity {
 			public void onFinish() {
 				viewTimer.setText("Time up!");
 				viewTimer.setVisibility(View.VISIBLE);
-				new AlertDialog.Builder(Questions.this)
-						.setTitle("Time Up!")
-						.setMessage("Press OK to submit answers")
-						.setPositiveButton(android.R.string.ok,
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog,
-											int which) {
-										// continue with submission
-										submit();
-									}
-								}).setIcon(android.R.drawable.ic_dialog_info)
-						.show();
-			}
+				/*
+				 * new AlertDialog.Builder(Questions.this) .setTitle("Time Up!")
+				 * .setMessage("Press OK to submit answers")
+				 * .setPositiveButton(android.R.string.ok, new
+				 * DialogInterface.OnClickListener() { public void
+				 * onClick(DialogInterface dialog, int which) {
+				 */// continue with submission
+				submit();
+				/*
+				 * } }).setIcon(android.R.drawable.ic_dialog_info) .show();
+				 */}
 
 		}.start();
 	}
