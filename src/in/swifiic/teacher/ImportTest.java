@@ -6,9 +6,11 @@ import in.swifiic.exam.SendSoln;
 import in.swifiic.examapp.R;
 import in.swifiic.examapp.Constants;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -75,11 +77,13 @@ public class ImportTest extends Activity {
 				String filePath = data.getData().getPath();
 				// FilePath is path of file as a string
 				tFilePath.setText(filePath);
+				SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 				Action act = new Action("SendQuestions", Constants.aeCtx);
 				String dataStr = Helper.fileToB64String(filePath);
 				act.setFileData(dataStr);
-				// XXX - from SUTA provider or similar persistent data like preferences
-				act.addArgument("fromTeacher", "abhishek"); 
+				// gets Teacher name from SUTA provider - TODO need to set student/teacher roles
+				String fromTeacher = sharedPref.getString("my_identity", "UnknownUser");
+				act.addArgument("fromTeacher", fromTeacher); 
 				// XXX - should be from drop down list - similar to messenger - should have multi-select - New Activity is also fine
 				act.addArgument("students", "aniket|abhishek|aniket2"); 
 				//TODO add course name argument

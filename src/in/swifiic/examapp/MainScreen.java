@@ -77,7 +77,10 @@ public class MainScreen extends SwifiicActivity {
 			String studentName, String courseName) {
 		Log.d(TAG, "saveSubmissionAndNotify");
 		String path = Environment.getExternalStorageDirectory() + "/Exam/"
-				+ courseName + "/" + studentName;
+				+ courseName + "/";
+		File filePath = new File(path);
+		if(!filePath.exists()) filePath.mkdir();
+		path = path + studentName;
 		Helper.b64StringToFile(fileBase64Data, path + ".zip");
 
 		// TO Do add logic to create notification XXX

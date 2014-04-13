@@ -183,7 +183,7 @@ public class LoginActivity extends Activity {
 			// a folder else throws incorrect p/w if not
 			// found
 			File file = new File(path + mCode + ".zip");
-			if (file.exists()) {
+			if (file.exists()||mCode.equals(getIntent().getStringExtra("course"))) {
 				ExtractAllFiles ef = new ExtractAllFiles(path, mPassword, mCode);
 
 			} else {
@@ -200,7 +200,9 @@ public class LoginActivity extends Activity {
 			// form field with an error.
 			focusView.requestFocus();
 		} else {
+			String teacherName = getIntent().getStringExtra("teacher");
 			Intent intent = new Intent(LoginActivity.this, Questions.class);
+			intent.putExtra("teacher", teacherName);
 			intent.putExtra("path", path);
 			intent.putExtra("crsCode", mCode);
 			intent.putExtra("idNo", mIdNo);

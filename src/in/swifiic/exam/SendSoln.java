@@ -44,19 +44,23 @@ public class SendSoln extends SwifiicActivity {
 			public void onClick(View v) {
 				String path = getIntent().getStringExtra("path");
 				String fName = getIntent().getStringExtra("fName");
-				Log.d("SubmitCopy", "Sending file :" + path+fName);
+				Log.d("SubmitCopy", "Sending file :" + path + fName + ".zip");
 				Action act = new Action("SubmitCopy", Constants.aeCtx);
-				act.addFile(Helper.fileToB64String(path+fName));
+				act.addFile(Helper.fileToB64String(path + fName + ".zip"));
 				
-				// when we got the paper - this should have been saved for
+				SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+				
+				// TODO when we got the paper - this should have been saved for
 				// the subject and paper
-				act.addArgument("toTeacher", "abhishek"); 
+				String teacher = getIntent().getStringExtra("teacher");
+				act.addArgument("toTeacher", "aniket2");
 				
-				
+				String course = getIntent().getStringExtra("course");
+				act.addArgument("course", course);
+				String studentName = getIntent().getStringExtra("fromStudent");
+				act.addArgument("fromStudent", studentName);				
 
 				// Loading hub address from preferences
-				SharedPreferences sharedPref = PreferenceManager
-						.getDefaultSharedPreferences(v.getContext());
 				String hubAddress = sharedPref.getString("hub_address", "");
 				hubAddress = Constants.hubAddress;
 

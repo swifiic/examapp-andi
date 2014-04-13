@@ -59,6 +59,8 @@ public class Questions extends Activity {
 	private String path; // name of the test file location
 
 	private String courseCode;
+	
+	private String teacher;
 
 	private String idNo; // stores Id no. for creating zip file of that name
 
@@ -118,7 +120,7 @@ public class Questions extends Activity {
 		path = getIntent().getStringExtra("path");
 		courseCode = getIntent().getStringExtra("crsCode");
 		idNo = getIntent().getStringExtra("idNo");
-
+		teacher = getIntent().getStringExtra("teacher");
 		FileInputStream in = null;
 		try {
 			File file = new File(path + "/" + courseCode + "/questions.dat");
@@ -591,6 +593,9 @@ public class Questions extends Activity {
 			Intent sendSln = new Intent(Questions.this, SendSoln.class);
 			sendSln.putExtra("path", path + courseCode + "/");
 			sendSln.putExtra("fName", courseCode + idNo);
+			sendSln.putExtra("teacher", teacher);
+			sendSln.putExtra("course", courseCode);
+			sendSln.putExtra("fromStudent", idNo);
 			startActivity(sendSln);
 			finish();
 		} else
