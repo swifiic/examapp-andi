@@ -76,6 +76,7 @@
         </activity>
         
         <service android:name="in.swifiic.android.app.lib.GenericService" />
+        <service android:name="in.swifiic.examapp.ReceiverService" />
         <receiver
             android:name="in.swifiic.android.app.lib.IBRDtnReceiver"
             android:enabled="true"
@@ -93,6 +94,12 @@
                 <action android:name="de.tubs.ibr.dtn.intent.STATUS_REPORT" />
 
                 <category android:name="in.swifiic.examapp" />
+            </intent-filter>
+        </receiver>
+        
+        <receiver android:name="in.swifiic.examapp.ExamNoticeReceiver">
+            <intent-filter>
+                <action android:name="in.swifiic.app.DATA_RECEIVED" />
             </intent-filter>
         </receiver>
         
