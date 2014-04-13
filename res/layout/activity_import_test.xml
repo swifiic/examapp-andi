@@ -1,8 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="fill_vertical"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -13,28 +14,18 @@
         android:id="@+id/selectFile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="345dp"
-        android:layout_marginTop="153dp"
         android:text="Select File" />
 
     <Button
         android:id="@+id/selectUsers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/selectFile"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="44dp"
         android:text="Select Students" />
 
     <TextView
         android:id="@+id/filePath"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/selectFile"
-        android:layout_alignBottom="@+id/selectFile"
-        android:layout_toRightOf="@+id/selectUsers"
         android:text="display_file_path"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -42,9 +33,6 @@
         android:id="@+id/sendFile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="45dp"
         android:text="Send" />
 
-</RelativeLayout>
+</LinearLayout>

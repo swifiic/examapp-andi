@@ -5,7 +5,6 @@ package in.swifiic.exam;
  *
  */
 
-import in.swifiic.examApp.AddFolder;
 
 import java.io.*;
 
@@ -15,7 +14,8 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import in.swifiic.examApp.R;
+import in.swifiic.examapp.R;
+import in.swifiic.examapp.AddFolder;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;

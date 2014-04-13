@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import in.swifiic.examApp.R;
+import in.swifiic.examapp.R;
 
 import android.os.Bundle;
 import android.app.Activity;

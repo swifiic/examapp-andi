@@ -7,12 +7,11 @@ package in.swifiic.exam;
 
 //import in.swifiic.examApp.R;
 
-import in.swifiic.android.app.lib.AppEndpointContext;
 import in.swifiic.android.app.lib.Helper;
 import in.swifiic.android.app.lib.ui.SwifiicActivity;
 import in.swifiic.android.app.lib.xml.Action;
-import in.swifiic.examApp.Constants;
-import in.swifiic.examApp.R;
+import in.swifiic.examapp.R;
+import in.swifiic.examapp.Constants;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;

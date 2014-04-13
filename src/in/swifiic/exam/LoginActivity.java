@@ -1,10 +1,10 @@
 package in.swifiic.exam;
 
-import in.swifiic.examApp.ExtractAllFiles;
 
 import java.io.File;
 
-import in.swifiic.examApp.R;
+import in.swifiic.examapp.R;
+import in.swifiic.examapp.ExtractAllFiles;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

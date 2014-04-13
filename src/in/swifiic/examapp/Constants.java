@@ -1,4 +1,4 @@
-package in.swifiic.examApp;
+package in.swifiic.examapp;
 
 import in.swifiic.android.app.lib.AppEndpointContext;
 

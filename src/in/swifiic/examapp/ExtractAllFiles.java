@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package in.swifiic.examApp;
+package in.swifiic.examapp;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;

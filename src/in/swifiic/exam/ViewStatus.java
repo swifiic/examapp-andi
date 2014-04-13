@@ -1,6 +1,6 @@
 package in.swifiic.exam;
 
-import in.swifiic.examApp.R;
+import in.swifiic.examapp.R;
 
 import android.os.Bundle;
 import android.app.Activity;

@@ -2,7 +2,7 @@ package in.swifiic.exam;
 
 
 
-import in.swifiic.examApp.R;
+import in.swifiic.examapp.R;
 
 import android.content.Context;
 import android.graphics.Bitmap;
