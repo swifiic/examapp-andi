@@ -596,6 +596,9 @@ public class Questions extends Activity {
 			sendSln.putExtra("teacher", teacher);
 			sendSln.putExtra("course", courseCode);
 			sendSln.putExtra("fromStudent", idNo);
+			
+			//this flag finishes the activity as soon as the activity is replaced by another activity
+			sendSln.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 			startActivity(sendSln);
 			finish();
 		} else

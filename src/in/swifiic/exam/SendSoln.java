@@ -17,6 +17,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.WindowManager;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.Button;
@@ -52,8 +53,12 @@ public class SendSoln extends SwifiicActivity {
 				
 				// TODO when we got the paper - this should have been saved for
 				// the subject and paper
-				String teacher = getIntent().getStringExtra("teacher");
-				act.addArgument("toTeacher", "aniket2");
+				String teacher;
+				if(getIntent().hasExtra("teacher")) {
+					teacher = getIntent().getStringExtra("teacher");
+				}
+				else teacher = "aniket2";
+				act.addArgument("toTeacher", teacher);
 				
 				String course = getIntent().getStringExtra("course");
 				act.addArgument("course", course);
@@ -69,7 +74,8 @@ public class SendSoln extends SwifiicActivity {
 
 				Toast.makeText(getApplicationContext(),
 						"Successfully Submitted", Toast.LENGTH_SHORT).show();
-				finish();
+				Intent i = new Intent(SendSoln.this, in.swifiic.examapp.MainScreen.class);
+				startActivity(i);
 			}
 		});
 	}

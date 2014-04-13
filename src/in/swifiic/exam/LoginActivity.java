@@ -71,8 +71,12 @@ public class LoginActivity extends Activity {
 		mIdNoView.setText(mIdNo);
 		mCodeView = (EditText) findViewById(R.id.courseCode);
 		mCodeView.setText(mCode);
-
 		mPasswordView = (EditText) findViewById(R.id.password);
+		
+		if(getIntent().hasExtra("course")) {
+			mCodeView.setText(getIntent().getStringExtra("course"));
+		}
+		
 		mPasswordView
 				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 					@Override

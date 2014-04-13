@@ -59,11 +59,11 @@ public class MainScreen extends SwifiicActivity {
 
 		
 		// Hide the status bar
-		getWindow().getDecorView().setSystemUiVisibility(
+/*		getWindow().getDecorView().setSystemUiVisibility(
 				View.SYSTEM_UI_FLAG_LOW_PROFILE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.activity_main_screen);
+	*/	setContentView(R.layout.activity_main_screen);
 
 		File folderPath = new File(Environment.getExternalStorageDirectory() + "/Exam/");
 		if(!folderPath.exists()) folderPath.mkdir();

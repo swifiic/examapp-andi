@@ -83,7 +83,7 @@ public class ImportTest extends Activity {
 				act.setFileData(dataStr);
 				// gets Teacher name from SUTA provider - TODO need to set student/teacher roles
 				String fromTeacher = sharedPref.getString("my_identity", "UnknownUser");
-				act.addArgument("fromTeacher", fromTeacher); 
+				act.addArgument("fromTeacher", "aniket2"); 
 				// XXX - should be from drop down list - similar to messenger - should have multi-select - New Activity is also fine
 				act.addArgument("students", "aniket|abhishek|aniket2"); 
 				//TODO add course name argument
