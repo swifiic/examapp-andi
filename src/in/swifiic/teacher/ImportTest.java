@@ -33,7 +33,7 @@ public class ImportTest extends Activity {
 			public void onClick(View v) {
 				// activity for importing test file
 				Intent fileIntent = new Intent(Intent.ACTION_GET_CONTENT);
-				fileIntent.setType("gagt/sdf");//(".zip application/zip");
+				fileIntent.setType("gagt/sdf");// (".zip application/zip");
 				try {
 					startActivityForResult(fileIntent, FILE_SELECT_RESULT_CODE);
 				} catch (ActivityNotFoundException e) {
@@ -82,6 +82,8 @@ public class ImportTest extends Activity {
 				act.addArgument("fromTeacher", "abhishek"); 
 				// XXX - should be from drop down list - similar to messenger - should have multi-select - New Activity is also fine
 				act.addArgument("students", "aniket|abhishek|aniket2"); 
+				//TODO add course name argument
+				act.addArgument("course", filePath.substring(filePath.lastIndexOf('/')+1, filePath.lastIndexOf('.')));
 				String hubAddress = Constants.hubAddress;
                 
                 Helper.sendAction(act, hubAddress + Constants.hubEndpoint, getBaseContext());

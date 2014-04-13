@@ -44,13 +44,14 @@ public class SendSoln extends SwifiicActivity {
 			public void onClick(View v) {
 				String path = getIntent().getStringExtra("path");
 				String fName = getIntent().getStringExtra("fName");
-				Log.d("SubmitCopy", "Seding file :" + path+fName);
+				Log.d("SubmitCopy", "Sending file :" + path+fName);
 				Action act = new Action("SubmitCopy", Constants.aeCtx);
 				act.addFile(Helper.fileToB64String(path+fName));
 				
 				// when we got the paper - this should have been saved for
 				// the subject and paper
 				act.addArgument("toTeacher", "abhishek"); 
+				
 				
 
 				// Loading hub address from preferences
