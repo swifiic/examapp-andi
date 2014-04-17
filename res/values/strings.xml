@@ -35,5 +35,10 @@
     <string name="title_activity_sendsol">SendSol</string>
     <string name="title_activity_import_test">ImportTest</string>
     <string name="title_activity_send_soln">SendSoln</string>
-
+    <string name="version">0.1</string>
+    <string name="pref_default_hub_address">Def. Hub Address</string>
+    <string name="pref_title_hub_address">Hub Address</string>
+    <string name="pref_default_my_identity">testUsr</string>
+    <string name="pref_title_my_identity">Default User Name</string>
+	<string name="title_activity_settings">Settings</string>
 </resources>

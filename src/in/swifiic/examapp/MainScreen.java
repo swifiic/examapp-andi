@@ -9,6 +9,7 @@ import java.io.File;
 
 import in.swifiic.android.app.lib.Helper;
 import in.swifiic.android.app.lib.ui.SwifiicActivity;
+import in.swifiic.android.app.lib.ui.UserChooserActivity;
 import in.swifiic.android.app.lib.xml.Notification;
 import in.swifiic.examapp.R;
 
@@ -16,6 +17,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.WindowManager;
 import android.app.ActionBar;
 import android.content.BroadcastReceiver;
@@ -114,4 +116,16 @@ public class MainScreen extends SwifiicActivity {
 		return true;
 
 	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+		if (itemId == R.id.action_settings) {
+			Intent selectedSettings = new Intent(this, SettingsActivity.class);
+			startActivity(selectedSettings);
+			return true;
+		}
+		else {
+			return super.onOptionsItemSelected(item);
+		}
+    }
 }

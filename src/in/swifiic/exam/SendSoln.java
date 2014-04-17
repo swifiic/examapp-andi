@@ -8,7 +8,6 @@ package in.swifiic.exam;
 //import in.swifiic.examApp.R;
 
 import in.swifiic.android.app.lib.Helper;
-import in.swifiic.android.app.lib.ui.SwifiicActivity;
 import in.swifiic.android.app.lib.xml.Action;
 import in.swifiic.examapp.R;
 import in.swifiic.examapp.Constants;
@@ -17,6 +16,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.WindowManager;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.View;
@@ -24,7 +24,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
 
-public class SendSoln extends SwifiicActivity {
+public class SendSoln extends Activity {
 
 
 	@Override
@@ -67,7 +67,7 @@ public class SendSoln extends SwifiicActivity {
 
 				// Loading hub address from preferences
 				String hubAddress = sharedPref.getString("hub_address", "");
-				hubAddress = Constants.hubAddress;
+				//hubAddress = Constants.hubAddress;
 
 				// TODO - Need to convert user name to userId for uniqueness
 				Helper.sendAction(act, hubAddress + Constants.hubEndpoint, v.getContext());

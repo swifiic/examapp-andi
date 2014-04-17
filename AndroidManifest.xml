@@ -74,6 +74,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="in.swifiic.examapp.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName="in.swifiic.android.app.msngr.MainActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.swifiic.android.app.msngr.MainActivity" />
+        </activity>
         
         <service android:name="in.swifiic.android.app.lib.GenericService" />
         <service android:name="in.swifiic.examapp.ReceiverService" />

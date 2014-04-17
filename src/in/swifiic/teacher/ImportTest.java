@@ -85,10 +85,10 @@ public class ImportTest extends Activity {
 				String fromTeacher = sharedPref.getString("my_identity", "UnknownUser");
 				act.addArgument("fromTeacher", "aniket2"); 
 				// XXX - should be from drop down list - similar to messenger - should have multi-select - New Activity is also fine
-				act.addArgument("students", "aniket|abhishek|aniket2"); 
+				act.addArgument("students", "aniket|abhishek|shivam"); 
 				//TODO add course name argument
 				act.addArgument("course", filePath.substring(filePath.lastIndexOf('/')+1, filePath.lastIndexOf('.')));
-				String hubAddress = Constants.hubAddress;
+				String hubAddress = sharedPref.getString("hub_address", "");
                 
                 Helper.sendAction(act, hubAddress + Constants.hubEndpoint, getBaseContext());
 			}
