@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="de.tubs.ibr.dtn.permission.DTN_COMMUNICATION" />
     <uses-permission android:name="in.swifiic.android.app.suta.USER" />
-    
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -83,9 +83,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="in.swifiic.android.app.msngr.MainActivity" />
         </activity>
-        
+
         <service android:name="in.swifiic.android.app.lib.GenericService" />
         <service android:name="in.swifiic.examapp.ReceiverService" />
+
         <receiver
             android:name="in.swifiic.android.app.lib.IBRDtnReceiver"
             android:enabled="true"
@@ -105,25 +106,26 @@
                 <category android:name="in.swifiic.examapp" />
             </intent-filter>
         </receiver>
-        
-        <receiver android:name="in.swifiic.examapp.ExamNoticeReceiver">
+        <receiver android:name="in.swifiic.examapp.ExamNoticeReceiver" >
             <intent-filter>
                 <action android:name="in.swifiic.app.DATA_RECEIVED" />
             </intent-filter>
         </receiver>
-        
         <receiver android:name="in.swifiic.android.app.lib.HubAddressReceiver" >
             <intent-filter>
                 <action android:name="swifiic.suta.hubAddressUpdate" />
             </intent-filter>
         </receiver>
-        
         <receiver android:name="in.swifiic.android.app.lib.IdentityReceiver" >
             <intent-filter>
                 <action android:name="swifiic.suta.myIdentityUpdate" />
             </intent-filter>
         </receiver>
-        
+
+        <activity
+            android:name="in.swifiic.teacher.SelectStudents"
+            android:label="@string/title_activity_select_students" >
+        </activity>
     </application>
 
 </manifest>

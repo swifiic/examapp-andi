@@ -20,7 +20,11 @@ import android.widget.TextView;
 
 public class ImportTest extends Activity {
 
-	private static int FILE_SELECT_RESULT_CODE = 7733;
+	private static int FILE_SELECT_RESULT_CODE = 1192;
+	private static int STUDENT_SELECT_RESULT_CODE = 1193;
+
+	private String studentList = "";
+	private String filePath = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +51,18 @@ public class ImportTest extends Activity {
 
 		bSelUser.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				// TODO invoke activity to select users from list view
+				Intent stdSelect = new Intent(ImportTest.this,
+						SelectStudents.class);
+				startActivityForResult(stdSelect, STUDENT_SELECT_RESULT_CODE);
 			}
 
 		});
 
 		bSndFile.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				// TODO invoke activity to select users from list view
+				// TODO invoke activity to send file
+				sendFile();
 			}
-
 		});
 	}
 
@@ -70,28 +76,50 @@ public class ImportTest extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Fix no activity available
 		TextView tFilePath = (TextView) findViewById(R.id.filePath);
+
 		if (data == null)
 			return;
 		if (requestCode == FILE_SELECT_RESULT_CODE) {
 			if (resultCode == RESULT_OK) {
-				String filePath = data.getData().getPath();
+				filePath = data.getData().getPath();
 				// FilePath is path of file as a string
 				tFilePath.setText(filePath);
-				SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-				Action act = new Action("SendQuestions", Constants.aeCtx);
-				String dataStr = Helper.fileToB64String(filePath);
-				act.setFileData(dataStr);
-				// gets Teacher name from SUTA provider - TODO need to set student/teacher roles
-				String fromTeacher = sharedPref.getString("my_identity", "UnknownUser");
-				act.addArgument("fromTeacher", "aniket2"); 
-				// XXX - should be from drop down list - similar to messenger - should have multi-select - New Activity is also fine
-				act.addArgument("students", "aniket|abhishek|shivam"); 
-				//TODO add course name argument
-				act.addArgument("course", filePath.substring(filePath.lastIndexOf('/')+1, filePath.lastIndexOf('.')));
-				String hubAddress = sharedPref.getString("hub_address", "");
-                
-                Helper.sendAction(act, hubAddress + Constants.hubEndpoint, getBaseContext());
+
 			}
+		} else if (requestCode == STUDENT_SELECT_RESULT_CODE) {
+			if (resultCode == RESULT_OK) {
+				studentList = data.getStringExtra("selectedStudents");
+			}
+		}
+	}
+
+	protected void sendFile() {
+
+		if (filePath.equals("") || studentList.equals("")) {
+			return;
+		} else {
+			SharedPreferences sharedPref = PreferenceManager
+					.getDefaultSharedPreferences(getBaseContext());
+			Action act = new Action("SendQuestions", Constants.aeCtx);
+			String dataStr = Helper.fileToB64String(filePath);
+			act.setFileData(dataStr);
+			// gets Teacher name from SUTA provider - TODO need to set
+			// student/teacher roles
+			String fromTeacher = sharedPref.getString("my_identity",
+					"UnknownUser");
+			act.addArgument("fromTeacher", "aniket2");
+			// XXX - should be from drop down list - similar to messenger -
+			// should have multi-select - New Activity is also fine
+			act.addArgument("students", studentList); // "aniket|abhishek|shivam"
+			// TODO add course name argument
+			act.addArgument(
+					"course",
+					filePath.substring(filePath.lastIndexOf('/') + 1,
+							filePath.lastIndexOf('.')));
+			String hubAddress = sharedPref.getString("hub_address", "");
+
+			Helper.sendAction(act, hubAddress + Constants.hubEndpoint,
+					getBaseContext());
 		}
 	}
 }
