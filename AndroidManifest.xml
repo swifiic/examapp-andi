@@ -19,8 +19,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="in.swifiic.examapp.MainScreen"
-            android:label="@string/app_name"
-            android:screenOrientation="landscape" >
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,7 +35,6 @@
             android:name="in.swifiic.exam.LoginActivity"
             android:label="@string/title_activity_login"
             android:parentActivityName="in.swifiic.examapp.MainScreen"
-            android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|adjustResize" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -59,17 +57,26 @@
         <activity
             android:name="in.swifiic.teacher.TeacherActivity"
             android:label="@string/title_activity_teacher" >
+             <intent-filter>
+                <action android:name="in.swifiic.teacher.TeacherActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity
             android:name="in.swifiic.teacher.ImportTest"
             android:label="@string/title_activity_import_test" >
+            <intent-filter>
+                <action android:name="in.swifiic.teacher.ImportTest" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity
             android:name="in.swifiic.exam.SendSoln"
-            android:label="@string/title_activity_send_soln"
-            android:screenOrientation="landscape" >
+            android:label="@string/title_activity_send_soln" >
             <intent-filter>
-                <action android:name="in.swifiic.examSendSoln" />
+                <action android:name="in.swifiic.exam.SendSoln" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -77,11 +84,10 @@
         <activity
             android:name="in.swifiic.examapp.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName="in.swifiic.android.app.msngr.MainActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="in.swifiic.android.app.msngr.MainActivity" />
+                android:value="in.swifiic.examapp.MainScreen" />
         </activity>
 
         <service android:name="in.swifiic.android.app.lib.GenericService" />

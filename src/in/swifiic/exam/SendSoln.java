@@ -17,16 +17,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.WindowManager;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
 
 public class SendSoln extends Activity {
 
-
+	private String teacher = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,8 +42,16 @@ public class SendSoln extends Activity {
 
 		// get path and file name from bundle
 
+		TextView tName = (TextView) findViewById(R.id.teacherName);
 		Button bSend = (Button) findViewById(R.id.sendButton);
 
+		// TODO when we got the paper - this should have been saved for
+		// the subject and paper
+		if (getIntent().hasExtra("teacher")) {
+			teacher = getIntent().getStringExtra("teacher");
+			tName.setText(teacher);
+		}
+		
 		bSend.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				String path = getIntent().getStringExtra("path");
@@ -48,34 +59,37 @@ public class SendSoln extends Activity {
 				Log.d("SubmitCopy", "Sending file :" + path + fName + ".zip");
 				Action act = new Action("SubmitCopy", Constants.aeCtx);
 				act.addFile(Helper.fileToB64String(path + fName + ".zip"));
-				
-				SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-				
-				// TODO when we got the paper - this should have been saved for
-				// the subject and paper
-				String teacher;
-				if(getIntent().hasExtra("teacher")) {
-					teacher = getIntent().getStringExtra("teacher");
+
+				SharedPreferences sharedPref = PreferenceManager
+						.getDefaultSharedPreferences(getBaseContext());
+				TextView tName = (TextView) findViewById(R.id.teacherName);
+				teacher = tName.getText().toString();
+				if(teacher==null||teacher.isEmpty()){
+					teacher = addTeacherName();
+					return;
 				}
-				else teacher = "aniket2";
 				act.addArgument("toTeacher", teacher);
-				
 				String course = getIntent().getStringExtra("course");
 				act.addArgument("course", course);
 				String studentName = getIntent().getStringExtra("fromStudent");
-				act.addArgument("fromStudent", studentName);				
+				act.addArgument("fromStudent", studentName);
 
 				// Loading hub address from preferences
 				String hubAddress = sharedPref.getString("hub_address", "");
-				//hubAddress = Constants.hubAddress;
+				// hubAddress = Constants.hubAddress;
 
 				// TODO - Need to convert user name to userId for uniqueness
-				Helper.sendAction(act, hubAddress + Constants.hubEndpoint, v.getContext());
+
+				Helper.sendAction(act, hubAddress + Constants.hubEndpoint,
+						v.getContext());
 
 				Toast.makeText(getApplicationContext(),
 						"Successfully Submitted", Toast.LENGTH_SHORT).show();
-				Intent i = new Intent(SendSoln.this, in.swifiic.examapp.MainScreen.class);
+				Intent i = new Intent(SendSoln.this,
+						in.swifiic.examapp.MainScreen.class);
 				startActivity(i);
+				finish();
+
 			}
 		});
 	}
@@ -88,5 +102,18 @@ public class SendSoln extends Activity {
 
 	}
 
+	private String addTeacherName() {
+		final StringBuilder teacherName = new StringBuilder("");
+		new AlertDialog.Builder(SendSoln.this).setTitle("Enter Teacher Name!")
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						
+					}
+				}).show();
+
+		// Create the AlertDialog
+
+		return teacherName.toString();
+	}
 
 }

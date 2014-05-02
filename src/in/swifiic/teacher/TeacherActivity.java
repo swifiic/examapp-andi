@@ -12,8 +12,6 @@ import android.widget.Button;
 
 public class TeacherActivity extends Activity {
 
-	private static int FILE_RESULT_CODE = 7733;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -24,7 +22,7 @@ public class TeacherActivity extends Activity {
 
 		bImport.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(TeacherActivity.this, ImportTest.class);
+				Intent intent = new Intent(TeacherActivity.this,ImportTest.class);
 				startActivity(intent);
 			}
 		});
@@ -40,7 +38,7 @@ public class TeacherActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.teacher, menu);
+	//	getMenuInflater().inflate(R.menu.teacher, menu);
 		return true;
 	}
 
