@@ -1,11 +1,10 @@
 package in.swifiic.exam;
 
-
 import java.io.File;
 
 import in.swifiic.examapp.R;
 import in.swifiic.examapp.ExtractAllFiles;
-
+import in.swifiic.examapp.SettingsActivity;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -24,9 +23,8 @@ import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 
 /**
- * @author aniket
- * Activity which displays a login screen to the user, offering registration as
- * well.
+ * @author aniket Activity which displays a login screen to the user, offering
+ *         registration as well.
  */
 @SuppressWarnings("unused")
 public class LoginActivity extends Activity {
@@ -34,7 +32,8 @@ public class LoginActivity extends Activity {
 	/*
 	 * The default IdNo to populate the IdNo field with.
 	 */
-//	public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";
+	// public static final String EXTRA_EMAIL =
+	// "com.example.android.authenticatordemo.extra.EMAIL";
 
 	/**
 	 * Keep track of the login task to ensure we can cancel it if requested.
@@ -66,17 +65,17 @@ public class LoginActivity extends Activity {
 		setupActionBar();
 
 		// Set up the login form.
-//		mIdNo = getIntent().getStringExtra(EXTRA_EMAIL);
+		// mIdNo = getIntent().getStringExtra(EXTRA_EMAIL);
 		mIdNoView = (EditText) findViewById(R.id.usrId);
 		mIdNoView.setText(mIdNo);
 		mCodeView = (EditText) findViewById(R.id.courseCode);
 		mCodeView.setText(mCode);
 		mPasswordView = (EditText) findViewById(R.id.password);
-		
-		if(getIntent().hasExtra("course")) {
+
+		if (getIntent().hasExtra("course")) {
 			mCodeView.setText(getIntent().getStringExtra("course"));
 		}
-		
+
 		mPasswordView
 				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 					@Override
@@ -116,23 +115,20 @@ public class LoginActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// If Settings has multiple levels, Up should navigate up
-			// that hierarchy.
-			NavUtils.navigateUpFromSameTask(this);
+		int itemId = item.getItemId();
+		if (itemId == R.id.action_settings) {
+			Intent selectedSettings = new Intent(this, SettingsActivity.class);
+			startActivity(selectedSettings);
 			return true;
+		} else {
+			return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		getMenuInflater().inflate(R.menu.login, menu);
+		getMenuInflater().inflate(R.menu.main_screen, menu);
 		return true;
 	}
 
@@ -187,7 +183,8 @@ public class LoginActivity extends Activity {
 			// a folder else throws incorrect p/w if not
 			// found
 			File file = new File(path + mCode + ".zip");
-			if (file.exists()||mCode.equals(getIntent().getStringExtra("course"))) {
+			if (file.exists()
+					|| mCode.equals(getIntent().getStringExtra("course"))) {
 				ExtractAllFiles ef = new ExtractAllFiles(path, mPassword, mCode);
 
 			} else {

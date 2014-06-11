@@ -1,36 +1,34 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-    
-    <PreferenceCategory
-        android:title="About Msngr" >
-    
-    <Preference
-        android:maxLines="1"
-        android:key="version"
-        android:selectable="false"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:title="Version"
-        android:summary="@string/version" />
 
-	<Preference
-        android:defaultValue="@string/pref_default_hub_address"
-        android:key="hub_address"
-        android:maxLines="1"
-        android:selectable="false"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:title="@string/pref_title_hub_address" />
-	
-	<Preference
-        android:defaultValue="@string/pref_default_my_identity"
-        android:key="my_identity"
-        android:maxLines="1"
-        android:selectable="false"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:title="@string/pref_title_my_identity" />
-    
-	</PreferenceCategory>
-	
+    <PreferenceCategory android:title="About Examapp" >
+        <Preference
+            android:key="version"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:selectable="false"
+            android:singleLine="true"
+            android:summary="@string/version"
+            android:title="Version" />
+        <Preference
+            android:defaultValue="@string/pref_default_hub_address"
+            android:key="hub_address"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:selectable="false"
+            android:singleLine="true"
+            android:title="@string/pref_title_hub_address" />
+        <Preference
+            android:defaultValue="@string/pref_default_my_identity"
+            android:key="my_identity"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:selectable="false"
+            android:singleLine="true"
+            android:title="@string/pref_title_my_identity" />
+        <Preference
+            android:key="resetButton"
+            android:summary="Reset your teacher/student preference. Requires app restart."
+            android:title="Reset app preferences" />
+    </PreferenceCategory>
 
 </PreferenceScreen>
