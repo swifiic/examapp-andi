@@ -3,7 +3,7 @@
 
     <string name="app_name">Exam</string>
     <string name="action_settings">Settings</string>
-    <string name="exam_button">Take A Test</string>
+    <string name="title_activity_send_soln">Send Soln</string>
     <string name="title_activity_questions">Questions</string>
     <string name="Test">&lt;Questions displayed here&gt;</string>
     <string name="nextButton">&gt;&gt;</string>
@@ -11,11 +11,9 @@
     <string name="rButton">Option</string>
     <string name="submitBtn">Submit</string>
     <string name="timerDef">00:00</string>
-    <string name="title_activity_activity_submit">Submit</string>
     <string name="submit_button">Submit</string>
     <string name="submit_content">Click \'Submit\' to\nsubmit answers</string>
     <string name="title_question_list">Questions</string>
-    <string name="title_question_detail">Question Detail</string>
     <string name="reviewCheck">Mark for Review</string>
     <string name="clear"><u>Clear Answer</u></string>
     <string name="start_new">New</string>
@@ -29,14 +27,10 @@
     <string name="done_button">Done</string>
     <string name="status_button">Show Status</string>
     <string name="title_activity_view_status">ViewStatus</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="teacher_button">Teacher Login</string>
     <string name="title_activity_teacher">TeacherActivity</string>
-    <string name="title_activity_sendsol">SendSol</string>
     <string name="title_activity_import_test">ImportTest</string>
-    <string name="title_activity_send_soln">SendSoln</string>
-    <string name="version">0.1</string>
-    <string name="pref_default_hub_address">Def. Hub Address</string>
+    <string name="version">1.0.2</string>
+    <string name="pref_default_hub_address">Default Hub Address</string>
     <string name="pref_title_hub_address">Hub Address</string>
     <string name="pref_default_my_identity">testUsr</string>
     <string name="pref_title_my_identity">Default User Name</string>

@@ -27,7 +27,7 @@
             android:title="@string/pref_title_my_identity" />
         <Preference
             android:key="resetButton"
-            android:summary="Reset your teacher/student preference. Requires app restart."
+            android:summary="Reset your teacher/student preference. App restart is recommended."
             android:title="Reset app preferences" />
     </PreferenceCategory>
 

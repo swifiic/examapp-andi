@@ -3,15 +3,15 @@ package in.swifiic.examapp;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
-import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
+import android.view.MenuItem;
 
 public class SettingsActivity extends PreferenceActivity {
 
@@ -49,12 +49,22 @@ public class SettingsActivity extends PreferenceActivity {
 											.edit();
 									prefEditor.remove(ROLE);
 									prefEditor.commit();
+
+									// go back to main activity on reset
+									Intent intent = new Intent(
+											SettingsActivity.this,
+											MainScreen.class);
+									intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+											| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+									startActivity(intent);
+									finish();
 								}
 							});
 					builder.setNegativeButton("Cancel",
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 										int which) {
+
 								}
 							});
 					alertDialog = builder.create();

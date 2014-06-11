@@ -29,16 +29,6 @@ import android.support.v4.app.NavUtils;
 @SuppressWarnings("unused")
 public class LoginActivity extends Activity {
 
-	/*
-	 * The default IdNo to populate the IdNo field with.
-	 */
-	// public static final String EXTRA_EMAIL =
-	// "com.example.android.authenticatordemo.extra.EMAIL";
-
-	/**
-	 * Keep track of the login task to ensure we can cancel it if requested.
-	 */
-
 	// Values for IdNo and password at the time of the login attempt.
 	private String mIdNo;
 	private String mCode;
@@ -55,17 +45,11 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getWindow().getDecorView().setSystemUiVisibility(
-				View.SYSTEM_UI_FLAG_LOW_PROFILE);
-		// Hide the status bar
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		setContentView(R.layout.activity_login);
 		setupActionBar();
 
 		// Set up the login form.
-		// mIdNo = getIntent().getStringExtra(EXTRA_EMAIL);
 		mIdNoView = (EditText) findViewById(R.id.usrId);
 		mIdNoView.setText(mIdNo);
 		mCodeView = (EditText) findViewById(R.id.courseCode);
@@ -211,4 +195,9 @@ public class LoginActivity extends Activity {
 			finish();
 		}
 	}
+	
+/*	public void onBackPressed() {
+		android.os.Process.killProcess(android.os.Process.myPid());
+		System.exit(1);
+	}*/
 }

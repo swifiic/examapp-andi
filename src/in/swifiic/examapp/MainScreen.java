@@ -29,7 +29,6 @@ import android.view.View.OnClickListener;
 
 public class MainScreen extends SwifiicActivity {
 	final static String TAG = "MainScreen";
-	boolean serviceStarted = false;
 
 	SharedPreferences sharedPreferences;
 	public static final String examappPREFERENCES = "examappPrefs";
@@ -134,17 +133,21 @@ public class MainScreen extends SwifiicActivity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
-	
+	/**
+	 * Directly starts up the main student or teacher activity depending on shared preferences 
+	 * @param role - either Teacher or Student
+	 */
 	void startRoleActivity(String role) {
 		if (role.equals("Teacher")) {
 			Intent intent = new Intent(MainScreen.this,
 					in.swifiic.teacher.TeacherActivity.class);
 			startActivity(intent);
-
+			finish();
 		} else if (role.equals("Student")) {
 			Intent intent = new Intent(MainScreen.this,
 					in.swifiic.exam.LoginActivity.class);
 			startActivity(intent);
+			finish();
 		}
 	}
 	
