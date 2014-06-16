@@ -1,5 +1,6 @@
 package in.swifiic.examapp;
 
+import in.swifiic.exam.StudentTestDB;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -49,6 +50,9 @@ public class SettingsActivity extends PreferenceActivity {
 											.edit();
 									prefEditor.remove(ROLE);
 									prefEditor.commit();
+									
+									//remove studentDB
+									getApplicationContext().deleteDatabase(StudentTestDB.DB_NAME);
 
 									// go back to main activity on reset
 									Intent intent = new Intent(

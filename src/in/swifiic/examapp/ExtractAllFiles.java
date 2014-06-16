@@ -19,7 +19,6 @@ package in.swifiic.examapp;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
-@SuppressWarnings("unused")
 public class ExtractAllFiles {
 
 	private String pathName;
@@ -30,7 +29,9 @@ public class ExtractAllFiles {
 		this.pathName = pathName;
 		this.password = password;
 		this.courseCode = courseCode;
+	}
 
+	public boolean extract() {
 		try {
 			// Initiate ZipFile object with the path/name of the zip file.
 			ZipFile zipFile = new ZipFile(pathName + courseCode + ".zip");
@@ -41,9 +42,11 @@ public class ExtractAllFiles {
 			// Extracts all files to the path specified
 			zipFile.extractAll(pathName + courseCode + "/");
 
+			return true;
 		} catch (ZipException e) {
 			e.printStackTrace();
+			return false;
 		}
-
 	}
+
 }

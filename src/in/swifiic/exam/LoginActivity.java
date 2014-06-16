@@ -1,30 +1,33 @@
 package in.swifiic.exam;
 
+import in.swifiic.examapp.ExtractAllFiles;
+import in.swifiic.examapp.R;
+import in.swifiic.examapp.SettingsActivity;
+
 import java.io.File;
 
-import in.swifiic.examapp.R;
-import in.swifiic.examapp.ExtractAllFiles;
-import in.swifiic.examapp.SettingsActivity;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
+import android.widget.Toast;
 
 /**
- * @author aniket Activity which displays a login screen to the user, offering
- *         registration as well.
+ * Activity which displays a login screen to the user
+ * 
+ * @author aniket
  */
 @SuppressWarnings("unused")
 public class LoginActivity extends Activity {
@@ -37,10 +40,15 @@ public class LoginActivity extends Activity {
 	// UI references.
 	private EditText mIdNoView;
 	private EditText mCodeView;
-	private EditText mPasswordView;
+	public EditText mPasswordView;
 	private View mLoginFormView;
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
+
+	// helper for getting test data from studentDB
+	StudentTestDB helper;
+	
+	String teacherName;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +57,9 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.activity_login);
 		setupActionBar();
 
+		// set up the DB
+		helper = new StudentTestDB(this);
+		helper.getWritableDatabase();
 		// Set up the login form.
 		mIdNoView = (EditText) findViewById(R.id.usrId);
 		mIdNoView.setText(mIdNo);
@@ -84,6 +95,22 @@ public class LoginActivity extends Activity {
 						attemptLogin();
 					}
 				});
+
+		if (doesDatabaseExist(getApplication(), StudentTestDB.DB_NAME)) {
+			Toast.makeText(getApplicationContext(), "Student DB exists",
+					Toast.LENGTH_LONG).show();
+		} else
+			Toast.makeText(getApplicationContext(),
+					"Student DB does not exist", Toast.LENGTH_LONG).show();
+	}
+
+	/**
+	 * Checks if DB exists for testing only - remove in final version
+	 */
+	private static boolean doesDatabaseExist(ContextWrapper context,
+			String dbName) {
+		File dbFile = context.getDatabasePath(dbName);
+		return dbFile.exists();
 	}
 
 	/**
@@ -161,23 +188,50 @@ public class LoginActivity extends Activity {
 			focusView = mPasswordView;
 			cancel = true;
 		} else {
-			// password entered is the filename of the test file
-			path = Environment.getExternalStorageDirectory() + "/Exam/";
-			// checks whether the file exists, if yes, extracts the contents to
-			// a folder else throws incorrect p/w if not
-			// found
-			File file = new File(path + mCode + ".zip");
-			if (file.exists()
-					|| mCode.equals(getIntent().getStringExtra("course"))) {
-				ExtractAllFiles ef = new ExtractAllFiles(path, mPassword, mCode);
+			// password entered is the password of the compressed test file
+			StudentTestDB db = new StudentTestDB(this);
+			Cursor testData = db.getTestDataCursor(mCode);
+
+			// TODO If a test is already attempted, prevent it from the solution
+			// being resent -- check status column in DB and give a dialog
+			// box/set a label along
+			// with questions notifying the student
+			// TODO Check test day/time before allowing access to a test
+
+			// TODO Set test duration from DB
+			
+			String fileName = mCode;
+			int status;
+			if (!testData.moveToFirst()) { // if cursor is null, then that test does
+									// not exist in database.
+				Toast.makeText(
+						getApplicationContext(),
+						"Test \"" + mCode
+								+ "\" does not exist in the database.",
+						Toast.LENGTH_LONG).show();
+				cancel = true;
 
 			} else {
-				mPasswordView
-						.setError(getString(R.string.error_incorrect_password));
-				focusView = mPasswordView;
-				cancel = true;
-			}
+				teacherName = testData.getString(2);
+				fileName = testData.getString(6);
+				status = testData.getInt(7);
+				path = Environment.getExternalStorageDirectory() + "/Exam/";
 
+				// checks whether the file exists, if yes, extracts the contents
+				// to
+				// a folder else throws incorrect p/w if not
+				// found
+				File file = new File(path + fileName + ".zip");
+				ExtractAllFiles ef = new ExtractAllFiles(path, mPassword,
+						fileName);
+				boolean ext = ef.extract();
+				if (!ext) {
+					mPasswordView
+							.setError(getString(R.string.error_incorrect_password));
+					focusView = mPasswordView;
+					cancel = true;
+				}
+			}
 		}
 
 		if (cancel) {
@@ -185,7 +239,6 @@ public class LoginActivity extends Activity {
 			// form field with an error.
 			focusView.requestFocus();
 		} else {
-			String teacherName = getIntent().getStringExtra("teacher");
 			Intent intent = new Intent(LoginActivity.this, Questions.class);
 			intent.putExtra("teacher", teacherName);
 			intent.putExtra("path", path);
@@ -195,9 +248,9 @@ public class LoginActivity extends Activity {
 			finish();
 		}
 	}
-	
-/*	public void onBackPressed() {
-		android.os.Process.killProcess(android.os.Process.myPid());
-		System.exit(1);
-	}*/
+	/*
+	 * public void onBackPressed() {
+	 * android.os.Process.killProcess(android.os.Process.myPid());
+	 * System.exit(1); }
+	 */
 }

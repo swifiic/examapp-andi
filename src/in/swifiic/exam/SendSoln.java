@@ -64,10 +64,7 @@ public class SendSoln extends Activity {
 						.getDefaultSharedPreferences(getBaseContext());
 				TextView tName = (TextView) findViewById(R.id.teacherName);
 				teacher = tName.getText().toString();
-				if(teacher==null||teacher.isEmpty()){
-					teacher = addTeacherName();
-					return;
-				}
+				
 				act.addArgument("toTeacher", teacher);
 				String course = getIntent().getStringExtra("course");
 				act.addArgument("course", course);

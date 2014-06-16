@@ -1,8 +1,6 @@
 package in.swifiic.teacher;
 
 import in.swifiic.examapp.R;
-import in.swifiic.examapp.R.id;
-import in.swifiic.examapp.R.layout;
 
 import java.util.ArrayList;
  
@@ -68,7 +66,6 @@ public class SelectStudents extends Activity {
 			        Intent stdList = new Intent();
 			        
 			        // Create a bundle object
-			        Bundle b = new Bundle();
 			        stdList.putExtra("selectedStudents", outputStrArr);
 			        
 			        setResult(RESULT_OK, stdList);
