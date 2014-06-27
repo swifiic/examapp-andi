@@ -40,7 +40,7 @@ public class LoginActivity extends Activity {
 	// UI references.
 	private EditText mIdNoView;
 	private EditText mCodeView;
-	public EditText mPasswordView;
+	private EditText mPasswordView;
 	private View mLoginFormView;
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;

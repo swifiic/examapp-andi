@@ -71,7 +71,8 @@ public class ReceiverService extends IntentService {
 	}
 
 	private void createFileAndNotification(String fileBase64Data,
-			String teacherName, String courseName, String fileName) {
+			String teacherName, String courseName, String testDate,
+			String testTime, String testDuration, String fileName) {
 		Log.d(TAG, "createFileAndNotification");
 
 		// for writing the received received test info to studentDB
@@ -79,13 +80,14 @@ public class ReceiverService extends IntentService {
 		db.getWritableDatabase();
 
 		String path = Environment.getExternalStorageDirectory() + "/Exam/"
-				+ fileName;
+				+ fileName + ".zip";
 		Helper.b64StringToFile(fileBase64Data, path + ".zip");
 
-		//insert the received test data into student DB
-		db.insert(courseName, teacherName, "24/07/2014", "09:00", "45", fileName, 0);
+		// insert the received test data into student DB
+		db.insert(courseName, teacherName, testDate, testTime, testDuration,
+				fileName, 0);
 		db.close();
-		
+
 		Intent notifIntent = new Intent(ReceiverService.this,
 				in.swifiic.exam.LoginActivity.class);
 		notifIntent.putExtra("course", courseName);
@@ -140,14 +142,18 @@ public class ReceiverService extends IntentService {
 			// Checking for opName of Notification
 			if (notif.getNotificationName().equals("DeliverQuestions")) {
 				Log.d(TAG, "Received Questions.");
+
 				String fileBase64Data = notif.getFileData();
 				String teacherName = notif.getArgument("fromTeacher");
-				String courseName = notif.getArgument("course");
-				String fileName = courseName;
-				if (notif.hasArgument("fileName"))
-					fileName = notif.getArgument("fileName");
+				String testName = notif.getArgument("course");
+				String fileName = notif.getArgument("fileName");
+				String testDate = notif.getArgument("testDate");
+				String testTime = notif.getArgument("testTime");
+				String testDuration = notif.getArgument("testDuration");
+
 				createFileAndNotification(fileBase64Data, teacherName,
-						courseName, fileName);
+						testName, testDate, testTime, testDuration, fileName);
+
 				Log.d(TAG, "Showing notification now...");
 			} else if (notif.getNotificationName().equals("DeliverCopy")) {
 				Log.d(TAG, "Received Copies.");

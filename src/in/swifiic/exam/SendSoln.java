@@ -9,27 +9,26 @@ package in.swifiic.exam;
 
 import in.swifiic.android.app.lib.Helper;
 import in.swifiic.android.app.lib.xml.Action;
-import in.swifiic.examapp.R;
 import in.swifiic.examapp.Constants;
+import in.swifiic.examapp.R;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
-import android.view.WindowManager;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.view.View.OnClickListener;
 
 public class SendSoln extends Activity {
 
 	private String teacher = null;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,7 +50,7 @@ public class SendSoln extends Activity {
 			teacher = getIntent().getStringExtra("teacher");
 			tName.setText(teacher);
 		}
-		
+
 		bSend.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				String path = getIntent().getStringExtra("path");
@@ -64,7 +63,7 @@ public class SendSoln extends Activity {
 						.getDefaultSharedPreferences(getBaseContext());
 				TextView tName = (TextView) findViewById(R.id.teacherName);
 				teacher = tName.getText().toString();
-				
+
 				act.addArgument("toTeacher", teacher);
 				String course = getIntent().getStringExtra("course");
 				act.addArgument("course", course);
@@ -98,19 +97,4 @@ public class SendSoln extends Activity {
 		return true;
 
 	}
-
-	private String addTeacherName() {
-		final StringBuilder teacherName = new StringBuilder("");
-		new AlertDialog.Builder(SendSoln.this).setTitle("Enter Teacher Name!")
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						
-					}
-				}).show();
-
-		// Create the AlertDialog
-
-		return teacherName.toString();
-	}
-
 }

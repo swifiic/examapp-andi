@@ -49,7 +49,7 @@ public class StudentTestDB extends SQLiteOpenHelper {
 	 * @param teacherName
 	 *            - String
 	 * @param testDate
-	 *            - TODO get as extra from teacher
+	 *            - String DD/MM/YYYY
 	 * @param testTime
 	 *            - TODO get as extra from teacher
 	 * @param testDur

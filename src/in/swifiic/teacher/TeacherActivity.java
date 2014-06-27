@@ -23,7 +23,7 @@ public class TeacherActivity extends Activity {
 
 		bImport.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(TeacherActivity.this,ImportTest.class);
+				Intent intent = new Intent(TeacherActivity.this,SendTest.class);
 				startActivity(intent);
 			}
 		});
