@@ -79,9 +79,9 @@ public class ReceiverService extends IntentService {
 		StudentTestDB db = new StudentTestDB(this);
 		db.getWritableDatabase();
 
-		String path = Environment.getExternalStorageDirectory() + "/Exam/"
+		String filePath = Environment.getExternalStorageDirectory() + "/Exam/"
 				+ fileName + ".zip";
-		Helper.b64StringToFile(fileBase64Data, path + ".zip");
+		Helper.b64StringToFile(fileBase64Data, filePath);
 
 		// insert the received test data into student DB
 		db.insert(courseName, teacherName, testDate, testTime, testDuration,
@@ -113,17 +113,6 @@ public class ReceiverService extends IntentService {
 
 		nm.notify(notificationID, notif);
 		notificationID++;
-
-		/*
-		 * old code NotificationManager notificationManager =
-		 * (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-		 * 
-		 * Intent intent = new Intent(ReceiverService.this,
-		 * in.swifiic.exam.LoginActivity.class); intent.putExtra("course",
-		 * courseName); intent.putExtra("teacher", teacherName);
-		 * startActivity(intent);
-		 */
-
 	}
 
 	@Override

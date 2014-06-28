@@ -48,7 +48,7 @@ public class SendSoln extends Activity {
 		// the subject and paper
 		if (getIntent().hasExtra("teacher")) {
 			teacher = getIntent().getStringExtra("teacher");
-			tName.setText(teacher);
+			tName.setText("Teacher Name: " + teacher);
 		}
 
 		bSend.setOnClickListener(new OnClickListener() {

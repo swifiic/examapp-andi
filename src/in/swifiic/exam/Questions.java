@@ -5,7 +5,6 @@ package in.swifiic.exam;
  *
  */
 
-
 import java.io.*;
 
 import java.util.Random;
@@ -57,13 +56,10 @@ public class Questions extends Activity {
 	final static int noOfOpt = 4; // no. of options in MCQ questions
 
 	private String path; // name of the test file location
-
 	private String courseCode;
-	
-	private String teacher;
-
+	private String teacherName;
+	private String fileName;
 	private String idNo; // stores Id no. for creating zip file of that name
-
 	private int timerMin; // stores total duration of test in minutes
 
 	// string arrays for storing parsed questions data
@@ -119,14 +115,16 @@ public class Questions extends Activity {
 		}
 		path = getIntent().getStringExtra("path");
 		courseCode = getIntent().getStringExtra("crsCode");
+		fileName = getIntent().getStringExtra("fileName");
 		idNo = getIntent().getStringExtra("idNo");
-		teacher = getIntent().getStringExtra("teacher");
+		teacherName = getIntent().getStringExtra("teacher");
+		timerMin = Integer.parseInt(getIntent().getStringExtra("duration"));
 		FileInputStream in = null;
 		try {
-			File file = new File(path + "/" + courseCode + "/questions.dat");
+			File file = new File(path + "/" + fileName + "/questions.dat");
 			in = new FileInputStream(file);
 			File solDir = new File(path + courseCode + "/Solution");
-			solDir.mkdir();
+			solDir.mkdirs();
 		} catch (FileNotFoundException e1) {
 			Toast.makeText(getApplicationContext(),
 					"Unable to open Questions.dat", Toast.LENGTH_SHORT).show();
@@ -318,11 +316,8 @@ public class Questions extends Activity {
 				continue;
 			}
 			String name = parser.getName();
-			if (name.equals("timer")) {
-				timerMin = (Integer.parseInt(readTag(parser, "timer")));
-				// looking for the question tag
-			} else if (name.equals("totalQuestions")) { // total no. of
-														// questions
+			if (name.equals("totalQuestions")) { // total no. of
+													// questions
 				noOfQues = (Integer.parseInt(readTag(parser, "totalQuestions")));
 				quesText = new String[noOfQues];
 				optionText = new String[noOfQues][noOfOpt];
@@ -339,12 +334,11 @@ public class Questions extends Activity {
 		}
 	}
 
-	/*
+	/**
 	 * Parses the contents of an question. If it encounters a statement or an
 	 * options tag, it calls the respective "read" methods for processing. Else
 	 * skips the tag.
 	 */
-
 	private void readQuestion(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
 		int count = 0;
@@ -473,7 +467,7 @@ public class Questions extends Activity {
 
 			if (!(img[displayCnt] == null)) {
 				qpic.setVisibility(View.VISIBLE);
-				Bitmap bmp = BitmapFactory.decodeFile(path + "/" + courseCode
+				Bitmap bmp = BitmapFactory.decodeFile(path + "/" + fileName
 						+ "/" + img[displayCnt]);
 				qpic.setImageBitmap(bmp);
 			} else {
@@ -528,7 +522,10 @@ public class Questions extends Activity {
 			try {
 				// create a directory 'Solution' which will have the solutions
 				// files for packaging into a zip archive
-
+				File solDir = new File(path + courseCode + "/Solution");
+				if (!(solDir.exists() && solDir.isDirectory())) {
+					solDir.mkdirs();
+				}
 				File solFile = new File(path + courseCode + "/Solution/"
 						+ "soln.txt");
 				solFile.createNewFile();
@@ -584,20 +581,22 @@ public class Questions extends Activity {
 				Toast.makeText(getApplicationContext(),
 						"Unable to open file for writing Solution",
 						Toast.LENGTH_SHORT).show();
+				return;
 			}
 			@SuppressWarnings("unused")
 			AddFolder zipSol = new AddFolder(path + courseCode + "/Solution",
 					path + courseCode + "/", courseCode + idNo, idNo);
-			
-			//TODO convert created zip file into string and send it
+
+			// TODO convert created zip file into string and send it
 			Intent sendSln = new Intent(Questions.this, SendSoln.class);
 			sendSln.putExtra("path", path + courseCode + "/");
 			sendSln.putExtra("fName", courseCode + idNo);
-			sendSln.putExtra("teacher", teacher);
+			sendSln.putExtra("teacher", teacherName);
 			sendSln.putExtra("course", courseCode);
 			sendSln.putExtra("fromStudent", idNo);
-			
-			//this flag finishes the activity as soon as the activity is replaced by another activity
+
+			// this flag finishes the activity as soon as the activity is
+			// replaced by another activity
 			sendSln.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 			startActivity(sendSln);
 			finish();
@@ -641,17 +640,9 @@ public class Questions extends Activity {
 			public void onFinish() {
 				viewTimer.setText("Time up!");
 				viewTimer.setVisibility(View.VISIBLE);
-				/*
-				 * new AlertDialog.Builder(Questions.this) .setTitle("Time Up!")
-				 * .setMessage("Press OK to submit answers")
-				 * .setPositiveButton(android.R.string.ok, new
-				 * DialogInterface.OnClickListener() { public void
-				 * onClick(DialogInterface dialog, int which) {
-				 */// continue with submission
+
 				submit();
-				/*
-				 * } }).setIcon(android.R.drawable.ic_dialog_info) .show();
-				 */}
+			}
 
 		}.start();
 	}

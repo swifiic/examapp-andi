@@ -364,11 +364,12 @@ public class DrawActivity extends Activity implements OnClickListener {
 			b.compress(Bitmap.CompressFormat.PNG, 80, os);
 			os.flush();
 			os.close();
-			Toast.makeText(getApplicationContext(), "Successfully Submitted",
+			Toast.makeText(getApplicationContext(), "Drawing Successfully Saved",
 					Toast.LENGTH_SHORT).show();
 		} catch (FileNotFoundException fnfe) {
-			Toast.makeText(getApplicationContext(), "Could not save file",
+			Toast.makeText(getApplicationContext(), "Could not save drawing",
 					Toast.LENGTH_SHORT).show();
+			return;
 		} catch (IOException e) {
 			Toast.makeText(getApplicationContext(), "Could not create file for saving",
 					Toast.LENGTH_SHORT).show();

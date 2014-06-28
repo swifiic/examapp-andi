@@ -106,7 +106,7 @@
                 android:ems="7"
                 android:gravity="center"
                 android:hint="Test Duration"
-                android:inputType="textPersonName" >
+                android:inputType="number" >
             </EditText>
 
             <TextView

@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 public class SendTest extends Activity {
@@ -171,9 +170,13 @@ public class SendTest extends Activity {
 			} else {
 				Helper.sendAction(act, hubAddress + Constants.hubEndpoint,
 						getBaseContext());
-				Toast.makeText(getBaseContext(), "Test sent successfully",
-						Toast.LENGTH_SHORT).show();
-			}
+				Toast.makeText(
+						getBaseContext(),
+						"Test \"" + tName.getText().toString()
+								+ "\" sent successfully", Toast.LENGTH_SHORT)
+						.show();
+				finish()
+;			}
 		}
 	}
 

@@ -49,6 +49,9 @@ public class LoginActivity extends Activity {
 	StudentTestDB helper;
 	
 	String teacherName;
+	String fileName;
+	String duration;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -200,7 +203,7 @@ public class LoginActivity extends Activity {
 
 			// TODO Set test duration from DB
 			
-			String fileName = mCode;
+			fileName = mCode;
 			int status;
 			if (!testData.moveToFirst()) { // if cursor is null, then that test does
 									// not exist in database.
@@ -213,6 +216,7 @@ public class LoginActivity extends Activity {
 
 			} else {
 				teacherName = testData.getString(2);
+				duration = testData.getString(5);
 				fileName = testData.getString(6);
 				status = testData.getInt(7);
 				path = Environment.getExternalStorageDirectory() + "/Exam/";
@@ -242,8 +246,10 @@ public class LoginActivity extends Activity {
 			Intent intent = new Intent(LoginActivity.this, Questions.class);
 			intent.putExtra("teacher", teacherName);
 			intent.putExtra("path", path);
+			intent.putExtra("fileName", fileName);
 			intent.putExtra("crsCode", mCode);
 			intent.putExtra("idNo", mIdNo);
+			intent.putExtra("duration", duration);
 			startActivity(intent);
 			finish();
 		}
